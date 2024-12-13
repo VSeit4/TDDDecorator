@@ -15,7 +15,7 @@ public class UsingParameterizedTest {
         MyClass tester = new MyClass();
         int m1 = data[0];
         int m2 = data[1];
-        int expected = data[2];
+        int expected = data[3];
         assertEquals(2, tester.multiply(m1, m2));
     }
 
