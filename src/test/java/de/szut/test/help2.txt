@@ -1,0 +1,97 @@
+@Test
+void testCase()
+{
+	String nullString = null;
+	String notNullString = "howtodoinjava.com";
+
+	//Test will pass
+	Assertions.assertNotNull(notNullString);
+
+	//Test will fail
+	Assertions.assertNotNull(nullString);
+
+	//Test will pass
+	Assertions.assertNull(nullString);
+
+	// Test will fail
+	Assertions.assertNull(notNullString);
+}
+
+void test()
+{
+    //Test will pass
+    Assertions.assertEquals(4, Calculator.add(2, 2));
+
+    //Test will fail
+    Assertions.assertEquals(3, Calculator.add(2, 2), "Calculator.add(2, 2) test failed");
+
+    //Test will fail
+    Supplier<String> messageSupplier  = () -> "Calculator.add(2, 2) test failed";
+    Assertions.assertEquals(3, Calculator.add(2, 2), messageSupplier);
+}
+
+@Test
+void testCase()
+{
+	String originalObject = "howtodoinjava.com";
+	String cloneObject = originalObject;
+	String otherObject = "example.com";
+
+	//Test will pass
+	Assertions.assertNotSame(originalObject, otherObject);
+
+	//Test will fail
+	Assertions.assertNotSame(originalObject, cloneObject);
+
+	//Test will pass
+	Assertions.assertSame(originalObject, cloneObject);
+
+	// Test will fail
+	Assertions.assertSame(originalObject, otherObject);
+}
+
+@Test
+void testCase() {
+
+	//This will pass
+	Assertions.assertTimeout(Duration.ofMinutes(1), () -> {
+		return "result";
+	});
+
+	//This will fail
+	Assertions.assertTimeout(Duration.ofMillis(100), () -> {
+		Thread.sleep(200);
+		return "result";
+	});
+
+	//This will fail
+	Assertions.assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
+		Thread.sleep(200);
+		return "result";
+	});
+}
+
+@Test
+void testCase() {
+
+	boolean trueBool = true;
+	boolean falseBool = false;
+
+	Assertions.assertTrue(trueBool);
+	Assertions.assertTrue(falseBool, "test execution message");
+	Assertions.assertTrue(falseBool, AppTest::message);
+	Assertions.assertTrue(AppTest::getResult, AppTest::message);
+
+	Assertions.assertFalse(falseBool);
+	Assertions.assertFalse(trueBool, "test execution message");
+	Assertions.assertFalse(trueBool, AppTest::message);
+	Assertions.assertFalse(AppTest::getResult, AppTest::message);
+}
+
+private static String message () {
+	return "Test execution result";
+}
+
+private static boolean getResult () {
+	return true;
+}
