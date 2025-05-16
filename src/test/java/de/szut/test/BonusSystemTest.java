@@ -120,5 +120,29 @@ class BonusSystemTest {
         double totalBonus = bonusCalculator.calculateTotalBonus(employee);
         assertThat(totalBonus).isEqualTo(1200.0);
     }
+    @Test
+    void shouldApplyMaximumBonusLimit() {
+        Employee employee = new Employee("Employee", 50, 100, 100, 0, true);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // base = 1000
+        // + seniority: 50 / 5 * 150 = 10 * 150 = 1500 -> 2500
+        // + project: 100 * 100 = 10000 -> 12500
+        // + teamLeader: +500 -> 13000
+        // + low absence: + 300 -> 13300
+        // * performance: 100 -> +20% -> 13300 * 1.2 = 15960
+        assertThat(totalBonus).isEqualTo(10000.0);
+    }
 
+    @Test
+    void shouldApplyMinimumBonusLimit() {
+        Employee employee = new Employee("Employee", 0, 0, 0, 50, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // base = 1000
+        // + seniority: 0 -> nichts
+        // + project: 0 -> nichts
+        // + teamLeader: false -> nichts
+        // + low absence: 50 -> 1000 - 400 -> 600
+        // * performance: 0 -> -20% -> 600 * 0.8 = 480
+        assertThat(totalBonus).isEqualTo(500.0);
+    }
 }
