@@ -145,4 +145,16 @@ class BonusSystemTest {
         // * performance: 0 -> -20% -> 600 * 0.8 = 480
         assertThat(totalBonus).isEqualTo(500.0);
     }
+    @Test
+    void shouldApplyAllBonusesAndPenaltiesCorrectly() {
+        Employee employee = new Employee("Employee", 8, 90, 4, 1, true);
+        // base = 1000
+        // + seniority: 5/5 * 150 = 150 -> 1150
+        // + project: 4 * 100 = 400 -> 1550
+        // + teamLeader: 500 -> 2050
+        // + low absence: + 300 -> 2350
+        // * performance bonus: * 1.2 -> 2820
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        assertThat(totalBonus).isEqualTo(2820.0);
+    }
 }
