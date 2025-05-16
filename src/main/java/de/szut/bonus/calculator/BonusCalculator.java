@@ -22,6 +22,6 @@ public class BonusCalculator {
         bonus = new LowAbsenceBonus(bonus, e.getAbsenceDays());
         bonus = new HighAbsencePenalty(bonus, e.getAbsenceDays());
         bonus = new PerformanceBonus(bonus, e.getPerformanceRating());
-        return bonus.calculateBonus();
+        return bonusService.applyRestrictions(bonus.calculateBonus());
     }
 }

@@ -19,7 +19,7 @@ class BonusSystemTest {
 
     @BeforeEach
     void setUp() {
-        bonusService = new BonusService();
+        bonusService = new BonusService(500.0, 10000.0);
         bonusCalculator = new BonusCalculator(bonusService);
     }
 
