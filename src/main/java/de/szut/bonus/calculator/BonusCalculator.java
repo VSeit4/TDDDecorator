@@ -19,6 +19,8 @@ public class BonusCalculator {
         bonus = new SeniorityBonus(bonus, e.getYearsAtCompany());
         bonus = new ProjectCompletionBonus(bonus, e.getCompletedProjects());
         if (e.isTeamLeader()) bonus = new TeamLeaderBonus(bonus);
+        bonus = new LowAbsenceBonus(bonus, e.getAbsenceDays());
+        bonus = new HighAbsencePenalty(bonus, e.getAbsenceDays());
         bonus = new PerformanceBonus(bonus, e.getPerformanceRating());
         return bonus.calculateBonus();
     }
