@@ -66,5 +66,35 @@ class BonusSystemTest {
         // 1000 + 500 = 1500
         assertThat(totalBonus).isEqualTo(1500.0);
     }
+    @Test
+    void shouldAddLowAbsenceBonusFull() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 2, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 + 300 = 1300
+        assertThat(totalBonus).isEqualTo(1300.0);
+    }
 
+    @Test
+    void shouldAddLowAbsenceBonusHalf() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 6, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 + 150 = 1150
+        assertThat(totalBonus).isEqualTo(1150.0);
+    }
+
+    @Test
+    void shouldApplyHighAbsencePenaltyLevel1() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 16, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 - 200 = 800
+        assertThat(totalBonus).isEqualTo(800.0);
+    }
+
+    @Test
+    void shouldApplyHighAbsencePenaltyLevel2() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 30, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 - 400 = 600
+        assertThat(totalBonus).isEqualTo(600.0);
+    }
 }
