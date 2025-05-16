@@ -25,20 +25,23 @@ class BonusSystemTest {
 
     @Test
     void shouldReturnBaseBonusWithPerformancePenalty() {
-        Employee employee = new Employee(50);
+        Employee employee = new Employee("Employee", 0, 50, 0, 10, false);
         double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 base * 0.8 (performance < 60)
         assertThat(totalBonus).isEqualTo(800.0);
     }
     @Test
     void shouldApplyHighPerformanceBonus() {
-        Employee employee = new Employee(90);
+        Employee employee = new Employee("Employee", 0, 90, 0, 10, false);
         double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 * 1.2 = 1200
         assertThat(totalBonus).isEqualTo(1200.0);
     }
     @Test
     void shouldApplyMiddlePerformanceBonus() {
         Employee employee = new Employee(60);
         double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000
         assertThat(totalBonus).isEqualTo(1000.0);
     }
 
