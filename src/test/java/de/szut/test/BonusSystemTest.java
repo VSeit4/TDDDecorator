@@ -29,6 +29,18 @@ class BonusSystemTest {
         double totalBonus = bonusCalculator.calculateTotalBonus(employee);
         assertThat(totalBonus).isEqualTo(800.0);
     }
+    @Test
+    void shouldApplyHighPerformanceBonus() {
+        Employee employee = new Employee(90);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        assertThat(totalBonus).isEqualTo(1200.0);
+    }
+    @Test
+    void shouldApplyMiddlePerformanceBonus() {
+        Employee employee = new Employee(60);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        assertThat(totalBonus).isEqualTo(1000.0);
+    }
 
 
 }
