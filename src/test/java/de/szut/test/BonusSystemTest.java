@@ -44,6 +44,27 @@ class BonusSystemTest {
         // 1000
         assertThat(totalBonus).isEqualTo(1000.0);
     }
+    @Test
+    void shouldAddSeniorityBonus() {
+        Employee employee = new Employee("Employee", 10, 60, 0, 10, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 + 2*150 = 1300
+        assertThat(totalBonus).isEqualTo(1300.0);
+    }
 
+    @Test
+    void shouldAddProjectCompletionBonus() {
+        Employee employee = new Employee("Employee", 0, 60, 3, 10, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 + 3*100 = 1300
+        assertThat(totalBonus).isEqualTo(1300.0);
+    }
+    @Test
+    void shouldAddTeamLeaderBonus() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 10, true);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 + 500 = 1500
+        assertThat(totalBonus).isEqualTo(1500.0);
+    }
 
 }
