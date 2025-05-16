@@ -16,7 +16,9 @@ public class BonusCalculator {
     public double calculateTotalBonus(Employee e) {
         int baseBonusAmount = 1000;
         IBonus bonus = new BaseBonus(baseBonusAmount);
-
+        bonus = new SeniorityBonus(bonus, e.getYearsAtCompany());
+        bonus = new ProjectCompletionBonus(bonus, e.getCompletedProjects());
+        if (e.isTeamLeader()) bonus = new TeamLeaderBonus(bonus);
         bonus = new PerformanceBonus(bonus, e.getPerformanceRating());
         return bonus.calculateBonus();
     }

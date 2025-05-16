@@ -39,7 +39,7 @@ class BonusSystemTest {
     }
     @Test
     void shouldApplyMiddlePerformanceBonus() {
-        Employee employee = new Employee(60);
+        Employee employee = new Employee("Employee", 0, 60, 0, 10, false);
         double totalBonus = bonusCalculator.calculateTotalBonus(employee);
         // 1000
         assertThat(totalBonus).isEqualTo(1000.0);
