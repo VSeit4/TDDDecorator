@@ -97,4 +97,28 @@ class BonusSystemTest {
         // 1000 - 400 = 600
         assertThat(totalBonus).isEqualTo(600.0);
     }
+    @Test
+    void shouldNotApplyPenaltyAt15Days() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 15, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000  -> no penalty because 15 is not > 15
+        assertThat(totalBonus).isEqualTo(1000.0);
+    }
+
+    @Test
+    void shouldApplyPenaltyAt16Days() {
+        Employee employee = new Employee("Employee", 0, 60, 0, 16, false);
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        // 1000 - 200 = 800
+        assertThat(totalBonus).isEqualTo(800.0);
+    }
+    @Test
+    void shouldApplyPerformancePenaltyAfterDecorators() {
+        Employee employee = new Employee("Employee", 0, 50, 2, 2, false);
+        // 1000 + 200 (projects) + 300 (low absence) = 1500
+        // then * 0.8 (perf < 60) = 1200
+        double totalBonus = bonusCalculator.calculateTotalBonus(employee);
+        assertThat(totalBonus).isEqualTo(1200.0);
+    }
+
 }
